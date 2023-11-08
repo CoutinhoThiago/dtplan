@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "nome": "Ovos",
+    "calorias": 155,
+    "proteinas": 13,
+    "carboidratos": 1.1,
+    "gorduras": 11,
+    "descricao": "Rico em proteínas e vitaminas."
+  },
+  {
+    "id": "2",
+    "nome": "Frango",
+    "calorias": 239,
+    "proteinas": 27,
+    "carboidratos": 0,
+    "gorduras": 14,
+    "descricao": "Excelente fonte de proteínas magras."
+  },
+  {
+    "id": "3",
+    "nome": "Salmão",
+    "calorias": 208,
+    "proteinas": 20,
+    "carboidratos": 0,
+    "gorduras": 13,
+    "descricao": "Rico em Ômega-3 e proteínas."
+  },
+  {
+    "id": "4",
+    "nome": "Abacate",
+    "calorias": 160,
+    "proteinas": 2,
+    "carboidratos": 8.5,
+    "gorduras": 14.7,
+    "descricao": "Contém gorduras saudáveis e é rico em nutrientes."
+  },
+  {
+    "id": "5",
+    "nome": "Quinoa",
+    "calorias": 120,
+    "proteinas": 4.1,
+    "carboidratos": 21.3,
+    "gorduras": 1.9,
+    "descricao": "Alto teor de proteínas e fibras."
+  },
+    {"nome": "Aveia", "calorias": 389, "proteina": 16.9, "carboidratos": 66.3, "gorduras": 6.9},
+    {"nome": "Frango Grelhado", "calorias": 165, "proteina": 31, "carboidratos": 0, "gorduras": 3.6},
+    {"nome": "Batata Doce", "calorias": 86, "proteina": 1.6, "carboidratos": 20.1, "gorduras": 0.1},
+    {"nome": "Brócolis", "calorias": 55, "proteina": 3.7, "carboidratos": 11.2, "gorduras": 0.6},
+    {"nome": "Quinoa", "calorias": 120, "proteina": 4.1, "carboidratos": 21.3, "gorduras": 1.9}
+]
