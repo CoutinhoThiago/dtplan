@@ -1,5 +1,7 @@
 import 'package:dieta_e_treino/providers/alimentos_provider.dart';
 import 'package:dieta_e_treino/screens/refeicoes/alimentos_cadastrados_screen.dart';
+import 'package:dieta_e_treino/screens/treinos/cadastrar_exercicios_scren.dart';
+import 'package:dieta_e_treino/services/exercicios_serivice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_screen.dart'; // A tela inicial
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
         // Adicionando as rotas para as telas de cadastro
         '/cadastrar-refeicao': (context) => CadastrarRefeicaoScreen(),
         '/cadastrar-alimento': (context) => CadastrarAlimentoScreen(),
+
+        '/cadastrar-exercicio': (context) => CadastrarExercicioScreen(),
 
         // Adicionando as rotas para as telas de lsitegem
         '/alimentos-cadastrados': (context) => AlimentosCadastradosScreen()

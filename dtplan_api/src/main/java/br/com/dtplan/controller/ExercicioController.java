@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.dtplan.exercicios.DadosAtualizacaoExercicio;
 import br.com.dtplan.exercicios.DadosCadastroExercicio;
+import br.com.dtplan.exercicios.DadosDetalhamentoExercicio;
 import br.com.dtplan.exercicios.DadosListagemExercicio;
 import br.com.dtplan.exercicios.Exercicio;
 import br.com.dtplan.exercicios.ExercicioRepository;
@@ -43,10 +44,17 @@ public class ExercicioController {
 	}
 
 	@GetMapping
-    public ResponseEntity<Page<DadosListagemExercicio>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemExercicio>> listar(@PageableDefault(size = 10, sort = {"descricao"}) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemExercicio::new);
 		
 		return ResponseEntity.ok(page);
+    }
+	
+	@GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable long id) {
+		var exercicio = repository.getReferenceById(id);
+		
+		return ResponseEntity.ok(new DadosDetalhamentoExercicio(exercicio));
     }
 	
 	@PutMapping

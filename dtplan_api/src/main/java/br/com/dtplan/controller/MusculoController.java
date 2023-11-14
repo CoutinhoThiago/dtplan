@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.dtplan.exercicios.DadosAtualizacaoExercicio;
+import br.com.dtplan.exercicios.DadosDetalhamentoMusculo;
 import br.com.dtplan.exercicios.Exercicio;
 import br.com.dtplan.musculos.DadosAtualizacaoMusculo;
 import br.com.dtplan.musculos.DadosCadastroMusculo;
@@ -49,7 +50,7 @@ public class MusculoController {
 	}
 
 	@GetMapping
-    public ResponseEntity<Page<DadosListagemMusculo>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemMusculo>> listar(@PageableDefault(size = 10, sort = {"descricao"}) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemMusculo::new);
 		
 		return ResponseEntity.ok(page);

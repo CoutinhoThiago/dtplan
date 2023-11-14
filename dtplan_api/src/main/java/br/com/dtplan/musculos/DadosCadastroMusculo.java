@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroMusculo (
 	@NotBlank
-	String nome,
+	String descricao,
 	@NotNull
 	String acao
 	) {

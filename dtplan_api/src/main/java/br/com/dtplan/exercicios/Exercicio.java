@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,6 +23,16 @@ public class Exercicio {
 	private long id;
 	private String descricao;
 	private boolean ativo;
+	private int tipo;
+	
+	private String musculo_alvo;
+	private int series;
+	private int repeticoes_min;
+	private int repeticoes_max;
+	private double carga;
+	
+	private int duracao_minutos;
+	private int intensidade;
 	
 	public Exercicio(DadosCadastroExercicio dados) {
 		this.ativo = true;

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../models/plano_de_treino.dart';
 import '../../services/treinos_service.dart';
@@ -9,7 +11,7 @@ class TreinosScreen extends StatefulWidget {
 }
 
 class _TreinosScreenState extends State<TreinosScreen> {
-  final TrainingPlanService _service = TrainingPlanService();
+  final PlanoDeTreinoService _service = PlanoDeTreinoService();
   List<PlanoTreino> _planosTreino = [];
   bool _isLoading = true;
 
@@ -20,11 +22,28 @@ class _TreinosScreenState extends State<TreinosScreen> {
   }
 
   Future<void> _loadTrainingPlans() async {
-    var plans = await _service.fetchTrainingPlans();
+    var plans = await _service.fetchPlanoDeTreinoService();
     setState(() {
       _planosTreino = plans;
       _isLoading = false;
     });
+  }
+
+  void _navegarParaFormulario(String escolha) {
+    // Atualizei o método para lidar com a navegação para as telas de cadastro.
+    if (escolha == 'Cadastrar Exercicio') {
+      Navigator.of(context).pushNamed('/cadastrar-exercicio').then((resultado) {
+        if (resultado != null && resultado is Map<String, dynamic>) {
+          // setState(() {
+          //   exercicios.add(
+          //       resultado); // Adiciona a nova refeição retornada ao estado da lista de refeições.
+          // });
+        }
+      });
+    }
+    else if (escolha == 'Exercicios Cadastrados') {
+      //
+    }
   }
 
   @override
@@ -33,6 +52,19 @@ class _TreinosScreenState extends State<TreinosScreen> {
       appBar: AppBar(
         title: Text('Planos de Treino'),
         //backgroundColor: Colors.blueGrey, // Ajuste a cor conforme o tema do app
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: _navegarParaFormulario,
+            itemBuilder: (BuildContext context) {
+              return {'Cadastrar Exercicio', 'Exercicios cadastrados'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())

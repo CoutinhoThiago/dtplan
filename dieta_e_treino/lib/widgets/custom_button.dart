@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   // Valores finais para tornar o botão mais personalizável
