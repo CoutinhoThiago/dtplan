@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../models/exercicio/ExercicioCardio.dart';
+import '../../models/exercicio/ExercicioMusculacao.dart';
+import '../../models/exercicio/exercicio.dart';
 import '../../models/treino.dart';
 
 class DetalhesTreinoScreen extends StatefulWidget {
@@ -16,50 +19,94 @@ class _DetalhesTreinoScreenState extends State<DetalhesTreinoScreen> {
   @override
   void initState() {
     super.initState();
-    exerciciosConcluidos = List.generate(widget.treino.exercicios.length, (index) => false);
+    exerciciosConcluidos =
+        List.generate(widget.treino.exercicios.length, (index) => false);
+  }
+
+  IconData getIconForExercicio(Exercicio exercicio) {
+    if (exercicio is ExercicioMusculacao) {
+      return Icons.fitness_center;
+    } else if (exercicio is ExercicioCardio) {
+      return Icons.directions_run;
+    }
+    return Icons.help_outline;
+  }
+
+  void finalizarTreino() {
+    // Aqui, você implementaria a lógica para enviar os dados para o banco de dados
+    // E depois disso, voltar para a tela anterior
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalhes do Treino: ${widget.treino.descricao}'),
+        title: Text(widget.treino.descricao),
       ),
-      body: ListView.builder(
-        itemCount: widget.treino.exercicios.length,
-        itemBuilder: (context, index) {
-          final exercicio = widget.treino.exercicios[index];
-          final descricao = exercicio.descricao;
-          final repeticoes = exercicio.repeticoes.toString();
-          final series = exercicio.series.toString();
-          final listagem = '$descricao $repeticoes x$series';
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.treino.exercicios.length,
+              itemBuilder: (context, index) {
+                final exercicio = widget.treino.exercicios[index];
+                String detalhes = exercicio is ExercicioMusculacao
+                    ? '${exercicio.repeticoesMin} - ${exercicio.repeticoesMax} x ${exercicio.series}'
+                    : '${exercicio.duracaoMinutos} min';
 
-          return ListTile(
-            title: Text(
-              listagem,
-              style: TextStyle(
-                decoration: exerciciosConcluidos[index] ? TextDecoration.lineThrough : null,
-              ),
-            ),
-            trailing: Checkbox(
-              value: exerciciosConcluidos[index],
-              onChanged: (value) {
-                setState(() {
-                  exerciciosConcluidos[index] = value!;
-                });
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: ListTile(
+                    leading: Icon(getIconForExercicio(exercicio)),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          exercicio.descricao,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            decoration: exerciciosConcluidos[index]
+                                ? TextDecoration.lineThrough
+                                : null,
+                          ),
+                        ),
+                        SizedBox(height: 4.0),
+                        // Espaçamento entre título e subtítulo
+                        Text(
+                          detalhes,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    trailing: Checkbox(
+                      value: exerciciosConcluidos[index],
+                      onChanged: (value) {
+                        setState(() {
+                          exerciciosConcluidos[index] = value!;
+                        });
+                      },
+                    ),
+                  ),
+                );
               },
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Adicione ação para marcar todos os exercícios como concluídos ou não
-          setState(() {
-            exerciciosConcluidos = List.generate(widget.treino.exercicios.length, (index) => true);
-          });
-        },
-        child: Icon(Icons.check),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+            child: ElevatedButton(
+              onPressed: finalizarTreino,
+              child: Text('Finalizar Treino'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50), // Tamanho do botão
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -11,7 +11,8 @@ class DetalhesPlanoTreinoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalhes do Plano de Treino'),
+        title: Text(plano.nome),
+        //backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -19,47 +20,48 @@ class DetalhesPlanoTreinoScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Nome do Plano: ${plano.nome}',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              'Plano de Treino',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                //color: Colors.blueGrey,
+              ),
             ),
-            SizedBox(height: 8.0),
+            SizedBox(height: 10.0),
             Text(
               'Autor: ${plano.autor}',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 18, color: Colors.black54),
             ),
-            SizedBox(height: 8.0),
+            SizedBox(height: 5.0),
             Text(
               'Tipo: ${plano.tipo}',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 18, color: Colors.black54),
             ),
+            SizedBox(height: 20.0),
             Divider(),
+            SizedBox(height: 10.0),
             Text(
-              'Treinos do Plano:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Treinos:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), //, color: Colors.blueGrey),
             ),
-            SizedBox(height: 8.0),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: plano.treinos.length,
-              itemBuilder: (context, index) {
-                final treino = plano.treinos[index];
-                return ListTile(
-                  title: Text(
-                    treino.descricao,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetalhesTreinoScreen(treino: treino),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            SizedBox(height: 10.0),
+            ...plano.treinos.map((treino) => Card(
+              child: ListTile(
+                title: Text(
+                  treino.descricao,
+                  style: TextStyle(fontSize: 16),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetalhesTreinoScreen(treino: treino),
+                    ),
+                  );
+                },
+              ),
+            )).toList(),
           ],
         ),
       ),

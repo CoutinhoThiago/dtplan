@@ -1,4 +1,4 @@
-import 'exercicio.dart';
+import 'exercicio/exercicio.dart';
 
 class Treino {
   final String descricao;
