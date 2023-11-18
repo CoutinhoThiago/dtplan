@@ -1,4 +1,4 @@
-package br.com.dtplan.exercicios;
+package br.com.dtplan.domain.exercicio;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +37,18 @@ public class Exercicio {
 	public Exercicio(DadosCadastroExercicio dados) {
 		this.ativo = true;
 		this.descricao = dados.descricao();
+		this.ativo = dados.ativo();
+		this.tipo = dados.tipo();
+
+		this.musculo_alvo = dados.musculo_alvo();
+		this.series = dados.series();
+		this.repeticoes_min = dados.repeticoes_min();
+		this.repeticoes_max = dados.repeticoes_max();
+		this.carga = dados.carga();
+
+		this.duracao_minutos = dados.duracao_minutos();
+		this.intensidade = dados.intensidade();
+
 	}
 	
 	public void atualizarInformacoes(DadosAtualizacaoExercicio dados) {

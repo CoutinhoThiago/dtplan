@@ -1,4 +1,4 @@
-package br.com.dtplan.musculos;
+package br.com.dtplan.domain.musculo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

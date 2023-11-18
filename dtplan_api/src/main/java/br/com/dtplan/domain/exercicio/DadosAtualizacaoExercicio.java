@@ -1,8 +1,12 @@
-package br.com.dtplan.exercicios;
+package br.com.dtplan.domain.exercicio;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroExercicio(
+public record DadosAtualizacaoExercicio(
+		@NotNull
+	    Long id,
+	    
 		@NotBlank
 		String descricao,
 		@NotBlank
@@ -19,4 +23,8 @@ public record DadosCadastroExercicio(
 	    int duracao_minutos,
 	    int intensidade
 	) {
+
+
 }
+
+

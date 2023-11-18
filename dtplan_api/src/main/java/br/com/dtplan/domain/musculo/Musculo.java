@@ -1,6 +1,6 @@
-package br.com.dtplan.musculos;
+package br.com.dtplan.domain.musculo;
 
-import br.com.dtplan.exercicios.DadosAtualizacaoExercicio;
+import br.com.dtplan.domain.exercicio.DadosAtualizacaoExercicio;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

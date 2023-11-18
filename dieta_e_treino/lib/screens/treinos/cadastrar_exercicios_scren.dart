@@ -181,33 +181,42 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      // Crie um mapa com os dados do exercício com base nos controladores
-                      var exerciseData = {
+                      // Define um mapa para armazenar os dados do exercício
+                      Map<String, dynamic> exerciseData = {
                         "descricao": _descricaoController.text,
                         "ativo": true,
-                        "tipo": _tipoExercicio == 'Musculação' ? 1 : 2, // Dependendo do tipo
-                        "musculo_alvo": _musculoAlvoController.text,
-                        "series": 20, //int.parse(_seriesController.text),
-                        "repeticoes_min": int.parse(_repeticoesMinController.text),
-                        "repeticoes_max": int.parse(_repeticoesMaxController.text),
-                        "carga": double.parse(_cargaController.text),
+                        "tipo": _tipoExercicio == 'Musculação' ? 1 : 2,
                       };
 
-                      // Chame o serviço para postar os dados
+                      // Adiciona campos condicionalmente com base no tipo de exercício
+                      if (_tipoExercicio == 'Musculação') {
+                        exerciseData.addAll({
+                          "musculo_alvo": _musculoAlvoController.text,
+                          "series": _selectedSeries,
+                          "repeticoes_min": int.tryParse(_repeticoesMinController.text),
+                          "repeticoes_max": int.tryParse(_repeticoesMaxController.text),
+                          "carga": double.tryParse(_cargaController.text),
+                        });
+                      } else if (_tipoExercicio == 'Aeróbico') {
+                        exerciseData.addAll({
+                          "duracao_minutos": int.tryParse(_duracaoController.text),
+                          "intensidade": int.tryParse(_intensidadeController.text),
+                        });
+                      }
+
+                      // Envia os dados para a API
                       final response = await exerciseService.postExercise(exerciseData);
 
-                      // Verifique a resposta e tome ações com base nela
-                      if (response.statusCode == 200) {
+                      // Verifica a resposta da API
+                      if (response.statusCode == 201) {
                         print('Exercício salvo com sucesso!');
                       } else {
-                        print('Erro ao salvar');
-                        // Falha: A solicitação POST não foi bem-sucedida
-                        // Trate o erro de acordo com as necessidades da sua aplicação.
+                        print('Erro ao salvar: ${response.statusCode}');
+                        // Tratamento de erros conforme necessário
                       }
                     } catch (e) {
-                      // Trate exceções, se ocorrerem
+                      // Tratamento de exceções
                       print('Erro ao salvar exercício: $e');
-                      // Você pode adicionar ações adicionais aqui, como exibir uma mensagem de erro.
                     }
                   }
                 },

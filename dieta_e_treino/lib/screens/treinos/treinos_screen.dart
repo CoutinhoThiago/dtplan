@@ -41,8 +41,8 @@ class _TreinosScreenState extends State<TreinosScreen> {
         }
       });
     }
-    else if (escolha == 'Exercicios Cadastrados') {
-      //
+    if (escolha == 'Exercicios cadastrados') {
+      Navigator.of(context).pushNamed('/exercicios-cadastrados');
     }
   }
 

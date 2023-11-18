@@ -1,4 +1,4 @@
-package br.com.dtplan.exercicios;
+package br.com.dtplan.domain.exercicio;
 
 public enum Funcao {
 	Agonista, //Os músculos agonistas são responsáveis diretamente pelo movimento desejado, sendo os principais agentes na execução de um movimento"

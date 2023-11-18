@@ -1,4 +1,4 @@
-package br.com.dtplan.exercicios;
+package br.com.dtplan.domain.exercicio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

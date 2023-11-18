@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.dtplan.exercicios.DadosAtualizacaoExercicio;
-import br.com.dtplan.exercicios.DadosDetalhamentoMusculo;
-import br.com.dtplan.exercicios.Exercicio;
-import br.com.dtplan.musculos.DadosAtualizacaoMusculo;
-import br.com.dtplan.musculos.DadosCadastroMusculo;
-import br.com.dtplan.musculos.DadosListagemMusculo;
-import br.com.dtplan.musculos.Musculo;
-import br.com.dtplan.musculos.MusculoRepository;
+import br.com.dtplan.domain.exercicio.DadosAtualizacaoExercicio;
+import br.com.dtplan.domain.exercicio.Exercicio;
+import br.com.dtplan.domain.musculo.DadosAtualizacaoMusculo;
+import br.com.dtplan.domain.musculo.DadosCadastroMusculo;
+import br.com.dtplan.domain.musculo.DadosDetalhamentoMusculo;
+import br.com.dtplan.domain.musculo.DadosListagemMusculo;
+import br.com.dtplan.domain.musculo.Musculo;
+import br.com.dtplan.domain.musculo.MusculoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -45,8 +45,6 @@ public class MusculoController {
 		var dto = new DadosDetalhamentoMusculo(musculo);
 		
 		return ResponseEntity.created(uri).body(dto);
-		
-
 	}
 
 	@GetMapping

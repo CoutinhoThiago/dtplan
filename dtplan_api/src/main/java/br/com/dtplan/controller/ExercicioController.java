@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.dtplan.exercicios.DadosAtualizacaoExercicio;
-import br.com.dtplan.exercicios.DadosCadastroExercicio;
-import br.com.dtplan.exercicios.DadosDetalhamentoExercicio;
-import br.com.dtplan.exercicios.DadosListagemExercicio;
-import br.com.dtplan.exercicios.Exercicio;
-import br.com.dtplan.exercicios.ExercicioRepository;
+import br.com.dtplan.domain.exercicio.DadosAtualizacaoExercicio;
+import br.com.dtplan.domain.exercicio.DadosCadastroExercicio;
+import br.com.dtplan.domain.exercicio.DadosDetalhamentoExercicio;
+import br.com.dtplan.domain.exercicio.DadosListagemExercicio;
+import br.com.dtplan.domain.exercicio.Exercicio;
+import br.com.dtplan.domain.exercicio.ExercicioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -30,16 +30,16 @@ public class ExercicioController {
 	
 	@Autowired
 	private ExercicioRepository repository;
-	
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity cadastrar(@RequestBody DadosCadastroExercicio dados, UriComponentsBuilder uriBuilder) {
 		var exercicio = new Exercicio(dados);
 		repository.save(exercicio);
-		
+
 		var uri = uriBuilder.path("exercicio/{id}").buildAndExpand(exercicio.getId()).toUri();
 		var dto = new DadosDetalhamentoExercicio(exercicio);
-		
+
 		return ResponseEntity.created(uri).body(dto);
 	}
 

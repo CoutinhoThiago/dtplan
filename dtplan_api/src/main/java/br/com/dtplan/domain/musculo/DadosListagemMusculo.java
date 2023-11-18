@@ -1,4 +1,4 @@
-package br.com.dtplan.musculos;
+package br.com.dtplan.domain.musculo;
 
 public record DadosListagemMusculo(String nome, String acao) {
 	
