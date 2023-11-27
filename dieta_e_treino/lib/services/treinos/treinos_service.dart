@@ -4,7 +4,7 @@ import '../../models/exercicio/exercicio.dart';
 import '../../models/plano_de_treino.dart';
 import '../../models/treino.dart';
 
-class PlanoDeTreinoService {
+class PlanoTreinoService {
   Future<List<PlanoTreino>> fetchPlanoDeTreinoService() async {
     // Simula um atraso de rede
     await Future.delayed(Duration(seconds: 2));

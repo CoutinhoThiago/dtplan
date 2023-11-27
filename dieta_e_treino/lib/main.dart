@@ -3,6 +3,8 @@ import 'package:dieta_e_treino/screens/refeicoes/alimentos/alimentos_cadastrados
 import 'package:dieta_e_treino/screens/treinos/exercicios/cadastrar_exercicios_scren.dart';
 import 'package:dieta_e_treino/screens/treinos/cadastrar_plano_treino_screen.dart';
 import 'package:dieta_e_treino/screens/treinos/exercicios/listar_exercicios_scren.dart';
+import 'package:dieta_e_treino/screens/treinos/treinos/cadastrar_treino_screen.dart';
+import 'package:dieta_e_treino/screens/treinos/treinos/listar_treinos_screen.dart';
 import 'package:dieta_e_treino/screens/treinos/treinos_screen.dart';
 import 'package:dieta_e_treino/services/treinos/exercicios_serivice.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         '/cadastrar-alimento': (context) => CadastrarAlimentoScreen(),
 
         '/cadastrar-exercicio': (context) => CadastrarExercicioScreen(),
-        //'/cadastrar-treino': (context) => (),
+        '/cadastrar-treino': (context) => CadastrarTreinoScreen(),
         '/cadastrar-plano-treino': (context) => CadastrarPlanoTreinoScreen(),
 
         // Adicionando as rotas para as telas de lsitegem
@@ -47,7 +49,7 @@ class MyApp extends StatelessWidget {
         '/alimentos-cadastrados': (context) => AlimentosCadastradosScreen(),
 
         '/treinos': (context) => TreinosScreen(), // Tela de listagem de planos de treino
-        //'/treino-cadastrados': (context) => (),
+        '/treino-cadastrados': (context) => ListagemTreinosScreen(),
         '/exercicios-cadastrados': (context) => ListagemExerciciosScreen(),
 
       },

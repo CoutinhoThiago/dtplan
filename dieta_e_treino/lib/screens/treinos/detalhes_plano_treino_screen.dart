@@ -31,7 +31,7 @@ class DetalhesPlanoTreinoScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Plano de Treino',
+              '${plano.nome}',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

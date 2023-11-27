@@ -10,7 +10,7 @@ class TreinosScreen extends StatefulWidget {
 }
 
 class _TreinosScreenState extends State<TreinosScreen> {
-  final PlanoDeTreinoService _service = PlanoDeTreinoService();
+  final PlanoTreinoService _service = PlanoTreinoService();
   List<PlanoTreino> _planosTreino = [];
   bool _isLoading = true;
 
@@ -44,7 +44,7 @@ class _TreinosScreenState extends State<TreinosScreen> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.list),
+                  leading: Icon(Icons.add),
                   title: Text('Cadastrar treino'),
                   onTap: () {
                     Navigator.pop(context);

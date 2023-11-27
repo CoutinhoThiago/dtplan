@@ -25,7 +25,7 @@ class _ListagemExerciciosScreenState extends State<ListagemExerciciosScreen> {
     final int tipoNumerico = exercise['tipo'] != null ? int.tryParse(exercise['tipo'].toString()) ?? 0 : 0;
     return tipoNumerico == 2
         ? 'Tipo: Aeróbico\nDuração: ${exercise['duracao'] ?? 'N/A'}'
-        : 'Tipo: Musculação\nMusculoalvo: ${exercise['musculoalvo'] ?? 'N/A'}';
+        : 'Tipo: Musculação\nMusculo alvo: ${exercise['musculo_alvo'] ?? 'N/A'}';
   }
 
   @override
