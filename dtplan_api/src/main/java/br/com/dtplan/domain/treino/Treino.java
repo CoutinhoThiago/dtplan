@@ -18,12 +18,12 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Treino {
 
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String descricao;
-	private String autor;
-	private String tipo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String descricao;
+    private String autor;
+    private String tipo;
 
 
     @ManyToMany

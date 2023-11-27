@@ -23,7 +23,6 @@ class AlimentosCadastradosScreen extends StatefulWidget {
 }
 
 class _AlimentosCadastradosScreenState extends State<AlimentosCadastradosScreen> {
-  // Esta é a lista estática que você vai usar como 'banco de dados' temporário
   List<Map<String, dynamic>> alimentosCadastrados = [
     {"nome": "Ovos", "calorias": 155, "proteinas": 13, "carboidratos": 1.1, "gorduras": 11, "descricao": "Rico em proteínas e vitaminas."},
     {"nome": "Frango", "calorias": 239, "proteinas": 27, "carboidratos": 0, "gorduras": 14, "descricao": "Excelente fonte de proteínas magras."},
@@ -38,16 +37,14 @@ class _AlimentosCadastradosScreenState extends State<AlimentosCadastradosScreen>
         title: Text('Alimentos Cadastrados'),
       ),
       body: ListView.builder(
-        itemCount: alimentosCadastrados.length, // Define o número de itens na lista
+        itemCount: alimentosCadastrados.length,
         itemBuilder: (context, index) {
-          var alimento = alimentosCadastrados[index]; // Obtém o item atual da lista
+          var alimento = alimentosCadastrados[index];
 
-          // Cria os widgets para exibir as informações
           return Card(
             child: ListTile(
               title: Text(alimento['nome'] ?? 'Sem título'), // Exibe o nome do alimento
               subtitle: Text(alimento['descricao'] ?? 'Sem descrição'), // Exibe a descrição
-              // Aqui, você pode adicionar mais características para exibir, se quiser
             ),
           );
         },

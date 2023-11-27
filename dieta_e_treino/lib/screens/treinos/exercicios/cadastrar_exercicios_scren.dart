@@ -10,7 +10,6 @@ class CadastrarExercicioScreen extends StatefulWidget {
 class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controladores para os campos de exercício
   final _descricaoController = TextEditingController();
   String _tipoExercicio = 'Musculação'; // Opções: 'Musculação', 'Aeróbico'
   final _musculoAlvoController = TextEditingController();
@@ -27,7 +26,6 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
 
   @override
   void dispose() {
-    // Dispor de todos os controladores
     _descricaoController.dispose();
     _musculoAlvoController.dispose();
     _seriesController.dispose();
@@ -74,7 +72,6 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                     return null;
                   },
               ),
-              // Seus campos existentes...
               DropdownButtonFormField(
                 value: _tipoExercicio,
                 onChanged: (String? newValue) {
@@ -193,14 +190,12 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     try {
-                      // Define um mapa para armazenar os dados do exercício
                       Map<String, dynamic> exerciseData = {
                         "descricao": _descricaoController.text,
                         "ativo": true,
                         "tipo": _tipoExercicio == 'Musculação' ? 1 : 2,
                       };
 
-                      // Adiciona campos condicionalmente com base no tipo de exercício
                       if (_tipoExercicio == 'Musculação') {
                         exerciseData.addAll({
                           "musculo_alvo": _musculoAlvoController.text,
@@ -216,23 +211,19 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                         });
                       }
 
-                      // Envia os dados para a API
                       final response = await exerciseService.postExercise(exerciseData);
 
-                      // Verifica a resposta da API
                       if (response != null) {
                         print('Código de Status: ${response.statusCode}');
                         if (response.statusCode == 201) {
                           print('Exercício salvo com sucesso!');
                         } else {
                           print('Erro ao salvar: Código de Status ${response.statusCode}');
-                          // Outro tratamento de erro conforme necessário
                         }
                       } else {
                         print('Resposta é null, verifique a requisição.');
                       }
                     } catch (e) {
-                      // Tratamento de exceções
                       print('Erro ao salvar exercício: $e');
                     }
                     Navigator.of(context).pushNamed('/exercicios-cadastrados');

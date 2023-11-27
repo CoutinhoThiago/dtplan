@@ -16,11 +16,11 @@ class AlimentosProvider with ChangeNotifier {
   ];
 
   List<Alimento> get alimentos {
-    return [..._alimentos]; // retorna uma cópia da lista
+    return [..._alimentos];
   }
 
   void adicionarAlimento(Alimento alimento) {
     _alimentos.add(alimento);
-    notifyListeners(); // notifica ouvintes sobre a mudança
+    notifyListeners();
   }
 }

@@ -8,19 +8,17 @@ import '../token_servicce.dart';
 class ExerciseService {
   final String apiUrl = "http://10.0.2.2:8080/exercicios";
 
-  // Método para verificar e renovar o token, se necessário
   Future<String> _checkAndRenewToken() async {
     String? token = await TokenService().getToken();
     if (token == null || !await TokenService().isTokenValid()) {
       token = await AuthService().login("admin", "123456");
-      await TokenService().saveToken(token); // Salva o novo token
+      await TokenService().saveToken(token);
     }
-    return token; // Retorna o token atualizado
+    return token;
   }
 
-  // Método para enviar dados de exercícios
   Future<http.Response?> postExercise(Map<String, dynamic> exerciseData) async {
-    String token = await _checkAndRenewToken(); // Obtem o token atualizado
+    String token = await _checkAndRenewToken();
 
     try {
       final response = await http.post(
@@ -42,9 +40,8 @@ class ExerciseService {
     }
   }
 
-  // Método para obter dados de exercícios
   Future<Map<String, dynamic>> getExercise() async {
-    String token = await _checkAndRenewToken(); // Obtem o token atualizado
+    String token = await _checkAndRenewToken();
 
     try {
       final response = await http.get(
@@ -61,11 +58,10 @@ class ExerciseService {
         throw Exception('Erro ao carregar os exercícios: ${response.statusCode}');
       }
     } catch (e) {
-      return {}; // Retorna um mapa vazio em caso de erro
+      return {};
     }
   }
 
-  // Método para lidar com exceções de rede
   void _handleException(e) {
     if (e is SocketException) {
       throw Exception('Erro de conexão: $e');

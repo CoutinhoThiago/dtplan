@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../services/token_servicce.dart';
 import 'edit_profile_screen.dart';
 import '../../models/usuario.dart';
-import 'login_screen.dart'; // Importe a tela de login
+import 'login_screen.dart';
 
 class PerfilScreen extends StatefulWidget {
   final ValueNotifier<Usuario> usuarioNotifier;
@@ -16,7 +16,7 @@ class PerfilScreen extends StatefulWidget {
 
 class _PerfilScreenState extends State<PerfilScreen> {
   final TokenService _tokenStorage = TokenService();
-  bool isLoggedIn = false; // Estado para controlar se o usuário está logado
+  bool isLoggedIn = false;
 
   @override
   void initState() {
@@ -34,14 +34,12 @@ class _PerfilScreenState extends State<PerfilScreen> {
   void _checkTokenValidity() async {
     String? token = await _tokenStorage.getToken();
     if (token == null || token.isEmpty) {
-      // Usuário não está logado
       if (mounted) {
         setState(() {
           isLoggedIn = false;
         });
       }
     } else {
-      // Usuário está logado
       if (mounted) {
         setState(() {
           isLoggedIn = true;

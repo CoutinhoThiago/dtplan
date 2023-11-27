@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// Importe quaisquer outros pacotes ou modelos que você possa precisar
+
+import '../../../services/treinos/treinos_service.dart';
 
 class CadastrarTreinoScreen extends StatefulWidget {
   @override
@@ -7,19 +8,17 @@ class CadastrarTreinoScreen extends StatefulWidget {
 }
 
 class _CadastrarTreinoScreenState extends State<CadastrarTreinoScreen> {
+  final treinoService = TreinoService();
+
   final _formKey = GlobalKey<FormState>();
-  String descricao = '';
-  String autor = '';
-  String tipo = '';
+  final _descricaoController = TextEditingController();
+  final _autorController = TextEditingController();
+  String _tipoExercicio = 'Musculação'; // Opções: 'Musculação', 'Aeróbico'
 
-  // Método para salvar o treino
-  void _salvarTreino() {
-    if (_formKey.currentState!.validate()) {
-      // Aqui você pode adicionar a lógica para salvar o treino
-      // Por exemplo, enviar para uma API ou salvar em uma base de dados local
-
-      print('Treino salvo com sucesso!');
-    }
+  @override
+  void dispose() {
+    _descricaoController.dispose();
+    _autorController.dispose();
   }
 
   @override
@@ -34,27 +33,74 @@ class _CadastrarTreinoScreenState extends State<CadastrarTreinoScreen> {
           padding: EdgeInsets.all(16.0),
           children: <Widget>[
             TextFormField(
-              decoration: InputDecoration(labelText: 'Descrição'),
+              controller: _autorController,
+              decoration: InputDecoration(
+                  labelText: 'Autor'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Por favor, insira a descrição';
+                  return 'Por favor, insira o autor';
                 }
                 return null;
               },
-              onSaved: (value) => descricao = value!,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Autor'),
-              onSaved: (value) => autor = value!,
+              controller: _descricaoController,
+              decoration: InputDecoration(
+                  labelText: 'Descrição do Exercício'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor, insira a descrição do exercício.';
+                }
+                return null;
+              },
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Tipo'),
-              onSaved: (value) => tipo = value!,
+            DropdownButtonFormField(
+              value: _tipoExercicio,
+              onChanged: (String? newValue) {
+                setState(() {
+                  _tipoExercicio = newValue!;
+                });
+              },
+              items: <String>['Musculação', 'Aeróbico']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              decoration: InputDecoration(labelText: 'Tipo de Exercício'),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _salvarTreino,
-              child: Text('Salvar Treino'),
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  try {
+                    Map<String, dynamic> treinoData = {
+                      "descricao": _descricaoController,
+                      "autor": _autorController,
+                      "tipo": _tipoExercicio == 'Musculação' ? 1 : 2,
+                      "exercicios_id": [1],
+                    };
+
+                    final response = await treinoService.postTreino(treinoData);
+
+                    if (response != null) {
+                      print('Código de Status: ${response.statusCode}');
+                      if (response.statusCode == 201) {
+                        print('Treino salvo com sucesso!');
+                      } else {
+                        print('Erro${response.statusCode}');
+                      }
+                    } else {
+                      print('Resposta é null, verifique a requisição.');
+                    }
+                  } catch (e) {
+                    print('Erro $e');
+                  }
+                  Navigator.of(context).pushNamed('/treinos-cadastrados');
+                }
+              },
+              child: Text('Salvar Exercício'),
             ),
           ],
         ),

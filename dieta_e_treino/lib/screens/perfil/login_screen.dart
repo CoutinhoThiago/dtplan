@@ -17,13 +17,13 @@ class _LoginScreenState extends State<LoginScreen> {
   String _email = 'admin';
   String _password = '123456';
 
-  bool _isLoading = false; // Adicione esta variável para controlar o indicador de carregamento
+  bool _isLoading = false;
 
   void _submit() async {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
 
-    setState(() => _isLoading = true); // Ativar o indicador de carregamento
+    setState(() => _isLoading = true);
 
     try {
       String token = await _authService.login(_email, _password);
@@ -40,8 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
     } catch (e) {
-      setState(() => _isLoading = false); // Desativar o indicador de carregamento em caso de erro
-      _showErrorDialog(context, e.toString()); // Exibe uma mensagem de erro
+      setState(() => _isLoading = false);
+      _showErrorDialog(context, e.toString());
     }
   }
 

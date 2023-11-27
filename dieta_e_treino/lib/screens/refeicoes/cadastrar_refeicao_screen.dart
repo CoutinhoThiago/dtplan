@@ -12,12 +12,9 @@ class _CadastrarRefeicaoScreenState extends State<CadastrarRefeicaoScreen> {
   final _nomeRefeicaoController = TextEditingController();
   List<Alimento> _alimentosSelecionados = [];
 
-  // Esta lista de alimentos é apenas para demonstração.
-  // Em um app real, você provavelmente buscaria isso de um banco de dados.
   final List<Alimento> _alimentosDisponiveis = [
     Alimento(nome: 'Banana', calorias: 89, proteina: 1.1, carboidrato: 23, gordura: 0.3, porcao: ''),
     Alimento(nome: 'Ovo', calorias: 155, proteina: 13, carboidrato: 1.1, gordura: 11, porcao: ''),
-    // Adicione mais alimentos aqui...
   ];
 
   void _adicionarAlimento(Alimento alimento) {
@@ -28,7 +25,6 @@ class _CadastrarRefeicaoScreenState extends State<CadastrarRefeicaoScreen> {
 
   void _cadastrarRefeicao() {
     if (_nomeRefeicaoController.text.isEmpty || _alimentosSelecionados.isEmpty) {
-      // Mostre um aviso se o nome da refeição estiver vazio ou nenhum alimento tiver sido selecionado.
       return;
     }
 
@@ -37,14 +33,11 @@ class _CadastrarRefeicaoScreenState extends State<CadastrarRefeicaoScreen> {
       alimentos: _alimentosSelecionados,
     );
 
-    // Aqui, você pode adicionar lógica para salvar a 'novaRefeicao' em um banco de dados.
-    // Por enquanto, vamos apenas imprimir a nova refeição.
     print(novaRefeicao.toString());
 
-    // Limpar o estado e voltar para a tela anterior.
     _nomeRefeicaoController.clear();
     _alimentosSelecionados.clear();
-    Navigator.of(context).pop(); // Isso retorna para a tela anterior.
+    Navigator.of(context).pop();
   }
 
   @override

@@ -7,16 +7,14 @@ class CadastrarAlimentoScreen extends StatefulWidget {
 
 class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _isButtonEnabled = false; // controle para habilitar/desabilitar o botão
+  bool _isButtonEnabled = false;
 
-  // Controladores para recuperar o valor dos campos
   final _nomeController = TextEditingController();
   final _caloriasController = TextEditingController();
   final _proteinasController = TextEditingController();
   final _carboidratosController = TextEditingController();
   final _gordurasController = TextEditingController();
 
-  // Função que é chamada sempre que um campo de texto é alterado
   void _checkFormValid() {
     if (_nomeController.text.isNotEmpty &&
         _caloriasController.text.isNotEmpty &&
@@ -24,18 +22,17 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
         _carboidratosController.text.isNotEmpty &&
         _gordurasController.text.isNotEmpty) {
       setState(() {
-        _isButtonEnabled = true; // habilita o botão se todos os campos estiverem preenchidos
+        _isButtonEnabled = true;
       });
     } else {
       setState(() {
-        _isButtonEnabled = false; // desabilita o botão se algum campo estiver vazio
+        _isButtonEnabled = false;
       });
     }
   }
 
   void _salvarAlimento() {
     if (_formKey.currentState!.validate()) {
-      // Se o formulário for válido, leia o valor inserido e crie um novo alimento.
       Map<String, dynamic> novoAlimento = {
         'nome': _nomeController.text,
         'calorias': _caloriasController.text,
@@ -44,7 +41,6 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
         'gorduras': _gordurasController.text,
       };
 
-      // "Pop" (retire) a tela e retorne o novo alimento.
       Navigator.of(context).pop(novoAlimento);
     }
   }
@@ -52,7 +48,6 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
   @override
   void initState() {
     super.initState();
-    // Adiciona listeners para os controladores
     _nomeController.addListener(_checkFormValid);
     _caloriasController.addListener(_checkFormValid);
     _proteinasController.addListener(_checkFormValid);
@@ -62,7 +57,6 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
 
   @override
   void dispose() {
-    // Limpeza dos controladores quando o Widget for descartado.
     _nomeController.dispose();
     _caloriasController.dispose();
     _proteinasController.dispose();
@@ -90,7 +84,7 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o nome do alimento.';
                   }
-                  return null; // Retorna null se a entrada é válida.
+                  return null;
                 },
               ),
               TextFormField(
@@ -101,7 +95,7 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira as calorias.';
                   }
-                  return null; // Retorna null se a entrada é válida.
+                  return null;
                 },
               ),
               TextFormField(
@@ -112,7 +106,7 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a quantidade de proteínas.';
                   }
-                  return null; // Retorna null se a entrada é válida.
+                  return null;
                 },
               ),
               TextFormField(
@@ -123,7 +117,7 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a quantidade de carboidratos.';
                   }
-                  return null; // Retorna null se a entrada é válida.
+                  return null;
                 },
               ),
               TextFormField(
@@ -134,12 +128,12 @@ class _CadastrarAlimentoScreenState extends State<CadastrarAlimentoScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira a quantidade de gorduras.';
                   }
-                  return null; // Retorna null se a entrada é válida.
+                  return null;
                 },
               ),
-              SizedBox(height: 20.0), // Espaço entre o último campo e o botão
+              SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: _isButtonEnabled ? _salvarAlimento : null, // Se os campos não estão válidos, o botão é desativado
+                onPressed: _isButtonEnabled ? _salvarAlimento : null,
                 child: Text('Salvar Alimento'),
               ),
             ],

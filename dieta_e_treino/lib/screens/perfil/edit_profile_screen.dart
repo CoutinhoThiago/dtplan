@@ -57,10 +57,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _updateProfile() {
-    // Obtenha o usuário atual
     Usuario currentUser = widget.usuarioNotifier.value;
 
-    // Crie uma nova instância do Usuario com os valores atualizados
     Usuario updatedUser = Usuario(
       nome: _nomeController.text,
       idade: int.parse(_idadeController.text),
@@ -69,15 +67,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       nivelAtividade: _nivelAtividadeController.text,
       objetivo: _objetivoController.text,
       imagePath: _image?.path ?? currentUser.imagePath,
-      // Outros campos podem ser atualizados da mesma maneira conforme necessário
     );
 
-    // Atualize o usuário no ValueNotifier
     widget.usuarioNotifier.value = updatedUser;
 
-    // Adicione lógica aqui para persistir as atualizações no backend, se necessário
-
-    // Volte para a tela anterior
     Navigator.pop(context);
   }
 
@@ -89,7 +82,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: _updateProfile, // Atualiza o perfil quando o ícone de salvar é pressionado.
+            onPressed: _updateProfile,
           ),
         ],
       ),

@@ -22,28 +22,24 @@ class HistoricoScreen extends StatelessWidget {
         children: [
           GraficoCard(
             titulo: 'Gráfico de Peso',
-            child: Placeholder(), // Substitua pelo seu gráfico real de peso aqui.
+            child: Placeholder(),
             onTap: () {
-              // Aqui, você pode implementar a lógica para adicionar/atualizar o peso.
               print('Gráfico de peso tocado');
             },
           ),
           GraficoCard(
             titulo: 'Gráfico de Água',
-            child: Placeholder(), // Substitua pelo seu gráfico real de consumo de água aqui.
+            child: Placeholder(),
             onTap: () {
-              // Aqui, você pode implementar a lógica para adicionar/atualizar a ingestão de água.
               print('Gráfico de água tocado');
             },
           ),
-          // Continue com os outros gráficos seguindo o mesmo padrão.
         ],
       ),
     );
   }
 }
 
-// Widget para o card do gráfico, que tornará mais fácil reutilizar o design do card.
 class GraficoCard extends StatelessWidget {
   final String titulo;
   final Widget child;
@@ -74,7 +70,7 @@ class GraficoCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Center(
-                    child: child,  // Seu gráfico real será inserido aqui.
+                    child: child,
                   ),
                 ),
               ],

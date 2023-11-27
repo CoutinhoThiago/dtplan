@@ -14,9 +14,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static const Color myBlueGrey800 = Color(0xFF37474F);
 
-  late final ValueNotifier<Usuario> usuarioNotifier; // Declare como late final
+  late final ValueNotifier<Usuario> usuarioNotifier;
 
-  late List<Widget> _widgetOptions; // Declare como late, não inicialize imediatamente
+  late List<Widget> _widgetOptions;
 
   @override
   void initState() {
@@ -36,14 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
       HistoricoScreen(),
       TreinosScreen(),
       RefeicoesScreen(),
-      PerfilScreen(usuarioNotifier: usuarioNotifier), // Aqui não precisa mais do parâmetro 'usuario'.
+      PerfilScreen(usuarioNotifier: usuarioNotifier),
     ];
   }
 
-  // Método para lidar com a lógica necessária quando um item do menu é tocado.
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Atualiza o índice selecionado com o índice do item que foi tocado.
+      _selectedIndex = index;
     });
   }
 
@@ -76,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Perfil',
           ),
         ],
-        currentIndex: _selectedIndex, // Destaca o item de menu selecionado
+        currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[900],
         onTap: _onItemTapped,
       ),

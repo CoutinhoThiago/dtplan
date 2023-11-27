@@ -9,7 +9,6 @@ class Refeicao {
     required this.alimentos,
   });
 
-  // Calcula o total de calorias da refeição somando as calorias de cada alimento.
   double get totalCalorias {
     double calorias = 0.0;
     for (var alimento in alimentos) {
@@ -18,7 +17,6 @@ class Refeicao {
     return calorias;
   }
 
-  // Calcula o total de proteínas da refeição.
   double get totalProteinas {
     double proteinas = 0.0;
     for (var alimento in alimentos) {
@@ -27,7 +25,6 @@ class Refeicao {
     return proteinas;
   }
 
-  // Calcula o total de carboidratos da refeição.
   double get totalCarboidratos {
     double carboidratos = 0.0;
     for (var alimento in alimentos) {
@@ -36,7 +33,6 @@ class Refeicao {
     return carboidratos;
   }
 
-  // Calcula o total de gorduras da refeição.
   double get totalGorduras {
     double gorduras = 0.0;
     for (var alimento in alimentos) {
@@ -45,7 +41,6 @@ class Refeicao {
     return gorduras;
   }
 
-  // Método que retorna uma representação textual da refeição.
   @override
   String toString() {
     return 'Refeição: $nome\n' +

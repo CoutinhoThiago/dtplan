@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         '/alimentos-cadastrados': (context) => AlimentosCadastradosScreen(),
 
         '/treinos': (context) => TreinosScreen(), // Tela de listagem de planos de treino
-        '/treino-cadastrados': (context) => ListagemTreinosScreen(),
+        '/treinos-cadastrados': (context) => ListagemTreinosScreen(),
         '/exercicios-cadastrados': (context) => ListagemExerciciosScreen(),
 
       },

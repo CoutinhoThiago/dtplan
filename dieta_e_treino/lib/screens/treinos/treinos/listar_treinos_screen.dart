@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
-import '../../../models/treino.dart';
-import 'detalhes_treino_screen.dart'; // Substitua pelo caminho correto
+
+import '../../../services/treinos/treinos_service.dart';
 
 class ListagemTreinosScreen extends StatefulWidget {
   @override
@@ -9,29 +8,55 @@ class ListagemTreinosScreen extends StatefulWidget {
 }
 
 class _ListagemTreinosScreenState extends State<ListagemTreinosScreen> {
-  List<Treino> treinos = [
-    Treino(descricao: "Treino A", dia: '', exercicios: []),
-    Treino(descricao: "Treino B", dia: '', exercicios: []),
-    // Adicione mais treinos aqui
-  ];
+  final TreinoService _treinoService = TreinoService();
+  late Future<List<dynamic>> _futureTreinos;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureTreinos = _treinoService.getTreinos();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Listagem de Treinos"),
+        backgroundColor: Colors.blueGrey[800],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.amber[900]),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text("Listagem de Treinos", style: TextStyle(color: Colors.amber[900])),
       ),
-      body: ListView.builder(
-        itemCount: treinos.length,
-        itemBuilder: (context, index) {
-          Treino treino = treinos[index];
-          return ListTile(
-            title: Text(treino.descricao),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DetalhesTreinoScreen(treino: treino),
+      body: FutureBuilder<List<dynamic>>(
+        future: _futureTreinos,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text("Erro: ${snapshot.error}"));
+          }
+
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhum treino disponível"));
+          }
+
+          var treinos = snapshot.data!;
+          return ListView.builder(
+            itemCount: treinos.length,
+            itemBuilder: (context, index) {
+              var treino = treinos[index];
+              return Card(
+                elevation: 4.0,
+                margin: EdgeInsets.all(8.0),
+                child: ListTile(
+                  title: Text(
+                    treino['descricao'] ?? 'Sem descrição',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text("Dia: ${treino['dia']}"),
                 ),
               );
             },
