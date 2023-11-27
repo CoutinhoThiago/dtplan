@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../models/usuario.dart';
-import '../../services/auth_service.dart';
+import '../../services/perfil/auth_service.dart';
 import '../../services/token_servicce.dart';
-import 'perfil_screen.dart'; // Importe sua tela de perfil aqui
-import 'package:shared_preferences/shared_preferences.dart';
+import 'perfil_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
-  final TokenStorage _tokenStorage = TokenStorage();
+  final TokenService _tokenStorage = TokenService();
 
   String _email = 'admin';
   String _password = '123456';

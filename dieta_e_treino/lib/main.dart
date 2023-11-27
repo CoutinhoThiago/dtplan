@@ -4,7 +4,7 @@ import 'package:dieta_e_treino/screens/treinos/exercicios/cadastrar_exercicios_s
 import 'package:dieta_e_treino/screens/treinos/cadastrar_plano_treino_screen.dart';
 import 'package:dieta_e_treino/screens/treinos/exercicios/listar_exercicios_scren.dart';
 import 'package:dieta_e_treino/screens/treinos/treinos_screen.dart';
-import 'package:dieta_e_treino/services/exercicios_serivice.dart';
+import 'package:dieta_e_treino/services/treinos/exercicios_serivice.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/home/home_screen.dart'; // A tela inicial
@@ -13,14 +13,10 @@ import 'screens/home/home_screen.dart'; // A tela inicial
 import 'screens/refeicoes/refeicoes_screen.dart'; // A tela de listagem de refeições
 import 'screens/refeicoes/cadastrar_refeicao_screen.dart'; // A tela de cadastro de refeições
 import 'screens/refeicoes/alimentos/cadastrar_alimento_screen.dart'; // A tela de cadastro de alimentos
-import 'screens/refeicoes/alimentos/alimentos_cadastrados_screen.dart'; // A tela de listagem de alimentos
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AlimentosProvider(),
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 

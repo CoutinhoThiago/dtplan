@@ -23,13 +23,15 @@ public class SecurityConfigurations {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf(csrf -> csrf.disable())
-				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		return http
+				.csrf(csrf -> csrf.disable()) // Desabilita CSRF
+				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura política de sessão como STATELESS
 				.authorizeHttpRequests(req -> {
-					req.requestMatchers(HttpMethod.POST, "/login").permitAll();
-					req.anyRequest().authenticated();
+					req.requestMatchers(HttpMethod.POST, "/login").permitAll(); // Permite POST no endpoint /login sem autenticação
+					req.requestMatchers(HttpMethod.GET, "/login").permitAll(); // Permite GET no endpoint /login sem autenticação
+					req.anyRequest().authenticated(); // Exige autenticação para todos os outros endpoints
 				})
-				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro personalizado
 				.build();
 	}
 

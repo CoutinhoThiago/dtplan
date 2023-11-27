@@ -1,8 +1,8 @@
-import '../models/exercicio/ExercicioCardio.dart';
-import '../models/exercicio/ExercicioMusculacao.dart';
-import '../models/exercicio/exercicio.dart';
-import '../models/plano_de_treino.dart';
-import '../models/treino.dart';
+import '../../models/exercicio/ExercicioCardio.dart';
+import '../../models/exercicio/ExercicioMusculacao.dart';
+import '../../models/exercicio/exercicio.dart';
+import '../../models/plano_de_treino.dart';
+import '../../models/treino.dart';
 
 class PlanoDeTreinoService {
   Future<List<PlanoTreino>> fetchPlanoDeTreinoService() async {

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../models/plano_de_treino.dart';
-import '../../services/treinos_service.dart';
+import '../../services/treinos/treinos_service.dart';
 import 'detalhes_plano_treino_screen.dart';
 
 class TreinosScreen extends StatefulWidget {

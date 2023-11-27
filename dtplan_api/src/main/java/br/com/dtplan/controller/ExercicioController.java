@@ -44,7 +44,7 @@ public class ExercicioController {
 	}
 
 	@GetMapping
-    public ResponseEntity<Page<DadosListagemExercicio>> listar(@PageableDefault(size = 10, sort = {"descricao"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemExercicio>> listar(@PageableDefault(size = 200, sort = {"descricao"}) Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemExercicio::new);
 		
 		return ResponseEntity.ok(page);

@@ -1,16 +1,26 @@
 import 'dart:io';
-import 'package:dieta_e_treino/services/token_servicce.dart';
+import 'package:dieta_e_treino/services/perfil/auth_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../token_servicce.dart';
 
 class ExerciseService {
   final String apiUrl = "http://10.0.2.2:8080/exercicios";
 
-  Future<http.Response?> postExercise(Map<String, dynamic> exerciseData) async {
-    String? token = await TokenStorage().getToken();
-    if (token == null) {
-      throw Exception('Token expirado ou ausente. Por favor, faça o login novamente.');
+  // Método para verificar e renovar o token, se necessário
+  Future<String> _checkAndRenewToken() async {
+    String? token = await TokenService().getToken();
+    if (token == null || !await TokenService().isTokenValid()) {
+      token = await AuthService().login("admin", "123456");
+      await TokenService().saveToken(token); // Salva o novo token
     }
+    return token; // Retorna o token atualizado
+  }
+
+  // Método para enviar dados de exercícios
+  Future<http.Response?> postExercise(Map<String, dynamic> exerciseData) async {
+    String token = await _checkAndRenewToken(); // Obtem o token atualizado
 
     try {
       final response = await http.post(
@@ -32,11 +42,9 @@ class ExerciseService {
     }
   }
 
+  // Método para obter dados de exercícios
   Future<Map<String, dynamic>> getExercise() async {
-    String? token = await TokenStorage().getToken();
-    if (token == null) {
-      throw Exception('Token expirado ou ausente. Por favor, faça o login novamente.');
-    }
+    String token = await _checkAndRenewToken(); // Obtem o token atualizado
 
     try {
       final response = await http.get(
@@ -53,10 +61,11 @@ class ExerciseService {
         throw Exception('Erro ao carregar os exercícios: ${response.statusCode}');
       }
     } catch (e) {
-      return {}; // Retorna um mapa vazio em vez de null
+      return {}; // Retorna um mapa vazio em caso de erro
     }
   }
 
+  // Método para lidar com exceções de rede
   void _handleException(e) {
     if (e is SocketException) {
       throw Exception('Erro de conexão: $e');

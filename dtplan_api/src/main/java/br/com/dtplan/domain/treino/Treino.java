@@ -2,7 +2,6 @@ package br.com.dtplan.domain.treino;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import br.com.dtplan.domain.exercicio.Exercicio;
 import jakarta.persistence.*;

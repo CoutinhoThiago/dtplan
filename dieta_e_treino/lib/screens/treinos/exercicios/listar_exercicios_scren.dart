@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../services/exercicios_serivice.dart';
+import '../../../services/treinos/exercicios_serivice.dart';
 
 class ListagemExerciciosScreen extends StatefulWidget {
   @override
@@ -7,26 +7,22 @@ class ListagemExerciciosScreen extends StatefulWidget {
 }
 
 class _ListagemExerciciosScreenState extends State<ListagemExerciciosScreen> {
-  final ExerciseService exerciseService = ExerciseService();
-  late Future<Map<String, dynamic>> futureExercises;
+  final ExerciseService _exerciseService = ExerciseService();
+  late Future<Map<String, dynamic>> _futureExercises = _exerciseService.getExercise();
 
   @override
   void initState() {
     super.initState();
-    futureExercises = exerciseService.getExercise();
+    _futureExercises = _exerciseService.getExercise();
   }
 
-  Icon getExerciseIcon(dynamic tipo) {
-    // Trata possíveis valores null para 'tipo'
-    int tipoNumerico = tipo != null ? int.tryParse(tipo.toString()) ?? 0 : 0;
-    return tipoNumerico == 2 ? Icon(Icons.directions_run) : Icon(
-        Icons.fitness_center);
+  Icon _getExerciseIcon(dynamic tipo) {
+    final int tipoNumerico = tipo != null ? int.tryParse(tipo.toString()) ?? 0 : 0;
+    return tipoNumerico == 2 ? Icon(Icons.directions_run) : Icon(Icons.fitness_center);
   }
 
-  String getSubtitle(dynamic exercise) {
-    // Trata possíveis valores null para 'tipo'
-    int tipoNumerico = exercise['tipo'] != null ? int.tryParse(
-        exercise['tipo'].toString()) ?? 0 : 0;
+  String _getSubtitle(dynamic exercise) {
+    final int tipoNumerico = exercise['tipo'] != null ? int.tryParse(exercise['tipo'].toString()) ?? 0 : 0;
     return tipoNumerico == 2
         ? 'Tipo: Aeróbico\nDuração: ${exercise['duracao'] ?? 'N/A'}'
         : 'Tipo: Musculação\nMusculoalvo: ${exercise['musculoalvo'] ?? 'N/A'}';
@@ -39,15 +35,12 @@ class _ListagemExerciciosScreenState extends State<ListagemExerciciosScreen> {
         backgroundColor: Colors.blueGrey[800],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.amber[900]),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(
-          "Listagem de exercícios",
-          style: TextStyle(color: Colors.amber[900]),
-        ),
+        title: Text("Listagem de exercícios", style: TextStyle(color: Colors.amber[900])),
       ),
       body: FutureBuilder<Map<String, dynamic>>(
-        future: futureExercises,
+        future: _futureExercises,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -70,12 +63,12 @@ class _ListagemExerciciosScreenState extends State<ListagemExerciciosScreen> {
                 elevation: 4.0,
                 margin: EdgeInsets.all(8.0),
                 child: ListTile(
-                  leading: getExerciseIcon(exercise['tipo']),
+                  leading: _getExerciseIcon(exercise['tipo']),
                   title: Text(
                     exercise['descricao'] ?? 'Sem descrição',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(getSubtitle(exercise)),
+                  subtitle: Text(_getSubtitle(exercise)),
                 ),
               );
             },

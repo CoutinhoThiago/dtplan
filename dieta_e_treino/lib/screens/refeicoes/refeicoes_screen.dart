@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/alimentos_service.dart';
+import '../../services/refeicoes/alimentos_service.dart';
 import 'alimentos/cadastrar_alimento_screen.dart';
 import 'cadastrar_refeicao_screen.dart';
 import 'alimentos/alimentos_cadastrados_screen.dart';

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 @Service
@@ -23,7 +24,7 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("API Voll.med")
+                    .withIssuer("API dtplan")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
@@ -36,7 +37,7 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.require(algoritmo)
-                    .withIssuer("API Voll.med")
+                    .withIssuer("API dtplan")
                     .build()
                     .verify(tokenJWT)
                     .getSubject();
@@ -46,6 +47,26 @@ public class TokenService {
     }
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        // Obtenha o momento atual em um fuso horário específico
+        LocalDateTime agora = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+
+        // Adiciona 24 horas ao momento atual
+        LocalDateTime dataExpiracao = agora.plusHours(24);
+
+        // Converte LocalDateTime para Instant considerando o mesmo fuso horário
+        return dataExpiracao.toInstant(ZoneOffset.of("-03:00"));
+    }
+
+    public boolean isTokenValido(String tokenJWT) {
+        try {
+            var algoritmo = Algorithm.HMAC256(secret);
+            JWT.require(algoritmo)
+                    .withIssuer("API dtplan")
+                    .build()
+                    .verify(tokenJWT);
+            return true; // Token válido
+        } catch (JWTVerificationException exception) {
+            return false; // Token inválido ou expirado
+        }
     }
 }

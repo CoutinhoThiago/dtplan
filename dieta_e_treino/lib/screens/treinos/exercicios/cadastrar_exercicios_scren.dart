@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../services/exercicios_serivice.dart';
+import '../../../services/treinos/exercicios_serivice.dart';
 
 class CadastrarExercicioScreen extends StatefulWidget {
   @override
@@ -109,7 +109,7 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                   decoration: InputDecoration(
                     labelText: 'Séries',
                   ),
-                  items: <int>[6, 8, 10, 12, 15, 20]
+                  items: <int>[1, 2, 3, 4, 5, 6]
                       .map<DropdownMenuItem<int>>((int value) {
                     return DropdownMenuItem<int>(
                       value: value,
