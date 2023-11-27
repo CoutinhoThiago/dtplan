@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../models/exercicio/ExercicioCardio.dart';
-import '../../models/exercicio/ExercicioMusculacao.dart';
-import '../../models/exercicio/exercicio.dart';
-import '../../models/treino.dart';
+import '../../../models/exercicio/ExercicioCardio.dart';
+import '../../../models/exercicio/ExercicioMusculacao.dart';
+import '../../../models/exercicio/exercicio.dart';
+import '../../../models/treino.dart';
 
 class DetalhesTreinoScreen extends StatefulWidget {
   final Treino treino;
@@ -42,7 +42,19 @@ class _DetalhesTreinoScreenState extends State<DetalhesTreinoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.treino.descricao),
+        backgroundColor: Colors.blueGrey[800],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.amber[900]),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          widget.treino.descricao,
+          style: TextStyle(
+            color: Colors.amber[900],
+          ),
+        ),
       ),
       body: Column(
         children: [

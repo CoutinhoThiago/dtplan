@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import '../../models/plano_de_treino.dart';
 import '../../services/treinos_service.dart';
@@ -29,42 +28,75 @@ class _TreinosScreenState extends State<TreinosScreen> {
     });
   }
 
-  void _navegarParaFormulario(String escolha) {
-    // Atualizei o método para lidar com a navegação para as telas de cadastro.
-    if (escolha == 'Cadastrar Exercicio') {
-      Navigator.of(context).pushNamed('/cadastrar-exercicio').then((resultado) {
-        if (resultado != null && resultado is Map<String, dynamic>) {
-          // setState(() {
-          //   exercicios.add(
-          //       resultado); // Adiciona a nova refeição retornada ao estado da lista de refeições.
-          // });
+  void _onFabPressed() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('Novo Plano de Treino'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed('/cadastrar-plano-treino');
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Cadastrar treino'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed('/cadastrar-treino');
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Treios cadastrados'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed('/treinos-cadastrados');
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('Cadastrar Exercício'),
+                  onTap: () {
+                    Navigator.pop(context); // Fecha o menu
+                    Navigator.of(context).pushNamed('/cadastrar-exercicio');
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Exercícios cadastrados'),
+                  onTap: () {
+                    Navigator.pop(context); // Fecha o menu
+                    Navigator.of(context).pushNamed('/exercicios-cadastrados');
+                  },
+                ),
+              ],
+            ),
+          );
         }
-      });
-    }
-    if (escolha == 'Exercicios cadastrados') {
-      Navigator.of(context).pushNamed('/exercicios-cadastrados');
-    }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planos de Treino'),
-        //backgroundColor: Colors.blueGrey, // Ajuste a cor conforme o tema do app
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: _navegarParaFormulario,
-            itemBuilder: (BuildContext context) {
-              return {'Cadastrar Exercicio', 'Exercicios cadastrados'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
+        backgroundColor: Colors.blueGrey[800],
+        leading: Icon(
+          Icons.fitness_center,
+          color: Colors.amber[900],
+        ),
+        title: Text(
+          "Planos de Treino",
+          style: TextStyle(
+            color: Colors.amber[900],
           ),
-        ],
+        ),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
@@ -76,7 +108,7 @@ class _TreinosScreenState extends State<TreinosScreen> {
           return Card(
             margin: EdgeInsets.all(8.0),
             child: ListTile(
-              leading: Icon(Icons.fitness_center), // Ícone treino de usculação
+              leading: Icon(Icons.fitness_center),
               title: Text(
                 plano.nome,
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -101,6 +133,12 @@ class _TreinosScreenState extends State<TreinosScreen> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onFabPressed,
+        child: Icon(Icons.add),
+        backgroundColor: Colors.amber[900],
+        tooltip: 'Mais opções',
       ),
     );
   }

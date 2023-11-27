@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/exercicios_serivice.dart';
+import '../../../services/exercicios_serivice.dart';
 
 class CadastrarExercicioScreen extends StatefulWidget {
   @override
@@ -43,7 +43,19 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastrar Exercício'),
+        backgroundColor: Colors.blueGrey[800],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.amber[900]),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Cadastrar exercicio",
+          style: TextStyle(
+            color: Colors.amber[900],
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -208,16 +220,22 @@ class _CadastrarExercicioScreenState extends State<CadastrarExercicioScreen> {
                       final response = await exerciseService.postExercise(exerciseData);
 
                       // Verifica a resposta da API
-                      if (response.statusCode == 201) {
-                        print('Exercício salvo com sucesso!');
+                      if (response != null) {
+                        print('Código de Status: ${response.statusCode}');
+                        if (response.statusCode == 201) {
+                          print('Exercício salvo com sucesso!');
+                        } else {
+                          print('Erro ao salvar: Código de Status ${response.statusCode}');
+                          // Outro tratamento de erro conforme necessário
+                        }
                       } else {
-                        print('Erro ao salvar: ${response.statusCode}');
-                        // Tratamento de erros conforme necessário
+                        print('Resposta é null, verifique a requisição.');
                       }
                     } catch (e) {
                       // Tratamento de exceções
                       print('Erro ao salvar exercício: $e');
                     }
+                    Navigator.of(context).pushNamed('/exercicios-cadastrados');
                   }
                 },
                 child: Text('Salvar Exercício'),

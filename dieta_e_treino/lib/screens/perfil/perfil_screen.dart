@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../../services/token_servicce.dart';
 import 'edit_profile_screen.dart';
 import '../../models/usuario.dart';
+
+import 'login_screen.dart'; // Importe a tela de login
 
 class PerfilScreen extends StatefulWidget {
   final ValueNotifier<Usuario> usuarioNotifier;
@@ -13,14 +16,27 @@ class PerfilScreen extends StatefulWidget {
 }
 
 class _PerfilScreenState extends State<PerfilScreen> {
+  final TokenStorage _tokenStorage = TokenStorage(); // Instância do serviço de armazenamento de token
+
   @override
   void initState() {
     super.initState();
     widget.usuarioNotifier.addListener(_onUsuarioUpdated);
+    _checkTokenValidity();
   }
 
   void _onUsuarioUpdated() {
     setState(() {});
+  }
+
+  // Verifica a validade do token
+  void _checkTokenValidity() async {
+    String? token = await _tokenStorage.getToken();
+    if (token == null || token.isEmpty) {
+      // Se não tiver token válido, redireciona para a tela de login
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+    }
+    // Caso contrário, permanece na tela de perfil
   }
 
   @override
@@ -36,7 +52,17 @@ class _PerfilScreenState extends State<PerfilScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'),
+        backgroundColor: Colors.blueGrey[800],
+        leading: Icon(
+          Icons.person,
+          color: Colors.amber[900],
+        ),
+        title: Text(
+          "Perfil",
+          style: TextStyle(
+            color: Colors.amber[900],
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),

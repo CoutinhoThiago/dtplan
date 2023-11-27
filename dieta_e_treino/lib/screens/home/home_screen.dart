@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  static const Color myBlueGrey800 = Color(0xFF37474F);
 
   late final ValueNotifier<Usuario> usuarioNotifier; // Declare como late final
 
@@ -20,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Inicialize o usuarioNotifier e _widgetOptions aqui
     usuarioNotifier = ValueNotifier<Usuario>(
       Usuario(
         nome: 'Nome do Usuário',
@@ -50,33 +50,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar removido para não ter barra no topo
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex), // Mostra o widget selecionado com base no índice atual.
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            backgroundColor: Colors.blue, // Cor de fundo da parra de navegação azul
+            backgroundColor: myBlueGrey800,
             icon: Icon(Icons.history),
             label: 'Histórico',
           ),
           BottomNavigationBarItem(
+            backgroundColor: myBlueGrey800,
             icon: Icon(Icons.fitness_center),
             label: 'Treinos',
           ),
           BottomNavigationBarItem(
+            backgroundColor: myBlueGrey800,
             icon: Icon(Icons.restaurant),
             label: 'Refeições',
           ),
           BottomNavigationBarItem(
+            backgroundColor: myBlueGrey800,
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
         ],
-        currentIndex: _selectedIndex, // Destaca o item de menu selecionado.
-        selectedItemColor: Colors.amber[800], // Define a cor do item de menu selecionado.
-        onTap: _onItemTapped, // Ação que ocorre quando um item é tocado.
+        currentIndex: _selectedIndex, // Destaca o item de menu selecionado
+        selectedItemColor: Colors.amber[900],
+        onTap: _onItemTapped,
       ),
     );
   }

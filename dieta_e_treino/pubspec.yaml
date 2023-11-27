@@ -30,9 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fl_chart: ^0.40.0 #biblioteca gráfica
+  fl_chart: ^0.40.0 # Biblioteca gráfica
   provider: ^6.0.1
   image_picker: ^0.8.4+4
+  shared_preferences: ^2.0.6 # Armazenar o Token
 
 
   # The following adds the Cupertino Icons font to your application.

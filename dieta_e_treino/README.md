@@ -1,16 +1,32 @@
-# dieta_e_treino
+# Nome do Projeto - Frontend
 
-A new Flutter project.
+Este é o frontend do [Nome do Projeto], desenvolvido com Flutter.
 
-## Getting Started
+## Requisitos
 
-This project is a starting point for a Flutter application.
+- Flutter SDK.
+- Android Studio ou outro IDE compatível com Flutter.
+- Emulador Android ou dispositivo físico.
 
-A few resources to get you started if this is your first Flutter project:
+## Configuração
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone o repositório do projeto.
+2. Abra o projeto no Android Studio ou em seu IDE preferido.
+3. Execute `flutter pub get` no terminal para instalar todas as dependências.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Execução
+
+Para executar o projeto no Android Studio:
+1. Escolha um emulador ou conecte um dispositivo físico.
+2. Execute o projeto utilizando o botão de play.
+
+## Conexão com o Backend
+
+- Certifique-se de que o backend está em execução (veja o README do backend para instruções).
+- Configure a URL do backend no projeto Flutter para garantir a comunicação correta.
+
+## Notas Adicionais
+
+- Para mais detalhes sobre como trabalhar com Flutter, consulte a documentação oficial do Flutter.
+
+

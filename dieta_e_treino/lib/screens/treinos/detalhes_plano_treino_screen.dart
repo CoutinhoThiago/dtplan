@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/plano_de_treino.dart';
-import 'detalhes_treino_screen.dart';
+import 'treinos/detalhes_treino_screen.dart';
 
 class DetalhesPlanoTreinoScreen extends StatelessWidget {
   final PlanoTreino plano;
@@ -11,8 +11,19 @@ class DetalhesPlanoTreinoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(plano.nome),
-        //backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blueGrey[800],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.amber[900]),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          plano.nome,
+          style: TextStyle(
+            color: Colors.amber[900],
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),

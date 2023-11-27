@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// Importe a biblioteca de gráficos que você vai usar.
 import 'package:fl_chart/fl_chart.dart';
 
 class HistoricoScreen extends StatelessWidget {
@@ -7,7 +6,17 @@ class HistoricoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Histórico"),
+        backgroundColor: Colors.blueGrey[800],
+        leading: Icon(
+          Icons.history,
+          color: Colors.amber[900],
+        ),
+        title: Text(
+            "Histórico",
+            style: TextStyle(
+            color: Colors.amber[900],
+          ),
+        ),
       ),
       body: ListView(
         children: [
