@@ -51,7 +51,7 @@ public class TokenService {
         LocalDateTime agora = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
         // Adiciona 24 horas ao momento atual
-        LocalDateTime dataExpiracao = agora.plusHours(24);
+        LocalDateTime dataExpiracao = agora.plusHours(2);
 
         // Converte LocalDateTime para Instant considerando o mesmo fuso horário
         return dataExpiracao.toInstant(ZoneOffset.of("-03:00"));

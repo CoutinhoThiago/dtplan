@@ -1,7 +1,5 @@
 package br.com.dtplan.controller;
 
-import br.com.dtplan.domain.treino.DadosListagemTreino;
-import br.com.dtplan.domain.treino.Treino;
 import jakarta.validation.Valid;
 import br.com.dtplan.domain.usuario.DadosAutenticacao;
 import br.com.dtplan.domain.usuario.Usuario;
@@ -29,8 +27,11 @@ public class AutenticacaoController {
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+
+        System.out.println(authenticationToken);
         var authentication = manager.authenticate(authenticationToken);
 
+        System.out.println(authentication);
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
