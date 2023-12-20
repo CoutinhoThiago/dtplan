@@ -1,6 +1,0 @@
-CREATE TABLE musculos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(100) NOT NULL,
-    acao VARCHAR(100) NOT NULL,
-    grupo_muscular VARCHAR(100) NOT NULL
-);

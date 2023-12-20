@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.dtplan.domain.exercicio.DadosAtualizacaoExercicio;
-import br.com.dtplan.domain.exercicio.DadosCadastroExercicio;
-import br.com.dtplan.domain.exercicio.DadosDetalhamentoExercicio;
-import br.com.dtplan.domain.exercicio.DadosListagemExercicio;
+import br.com.dtplan.domain.exercicio.dto.EditarExercicioDTO;
+import br.com.dtplan.domain.exercicio.dto.CadastrarExercicioDTO;
+import br.com.dtplan.domain.exercicio.dto.DetalharExercicioDTO;
+import br.com.dtplan.domain.exercicio.dto.ListarExerciciosDTO;
 import br.com.dtplan.domain.exercicio.Exercicio;
 import br.com.dtplan.domain.exercicio.ExercicioRepository;
 import jakarta.transaction.Transactional;
@@ -33,19 +33,19 @@ public class ExercicioController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrar(@RequestBody DadosCadastroExercicio dados, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity cadastrar(@RequestBody CadastrarExercicioDTO dados, UriComponentsBuilder uriBuilder) {
 		var exercicio = new Exercicio(dados);
 		repository.save(exercicio);
 
 		var uri = uriBuilder.path("exercicio/{id}").buildAndExpand(exercicio.getId()).toUri();
-		var dto = new DadosDetalhamentoExercicio(exercicio);
+		var dto = new DetalharExercicioDTO(exercicio);
 
 		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@GetMapping
-    public ResponseEntity<Page<DadosListagemExercicio>> listar(@PageableDefault(size = 200, sort = {"descricao"}) Pageable paginacao) {
-		var page = repository.findAll(paginacao).map(DadosListagemExercicio::new);
+    public ResponseEntity<Page<ListarExerciciosDTO>> listar(@PageableDefault(size = 200, sort = {"descricao"}) Pageable paginacao) {
+		var page = repository.findAll(paginacao).map(ListarExerciciosDTO::new);
 		
 		return ResponseEntity.ok(page);
     }
@@ -54,16 +54,16 @@ public class ExercicioController {
     public ResponseEntity detalhar(@PathVariable long id) {
 		var exercicio = repository.getReferenceById(id);
 		
-		return ResponseEntity.ok(new DadosDetalhamentoExercicio(exercicio));
+		return ResponseEntity.ok(new DetalharExercicioDTO(exercicio));
     }
 	
 	@PutMapping
     @Transactional
-    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoExercicio dados) {
+    public ResponseEntity atualizar(@RequestBody @Valid EditarExercicioDTO dados) {
 		var exercicio = repository.getReferenceById(dados.id());
 		exercicio.atualizarInformacoes(dados);
 		
-		return ResponseEntity.ok(new DadosDetalhamentoExercicio(exercicio));
+		return ResponseEntity.ok(new DetalharExercicioDTO(exercicio));
     }
 	
 	@PutMapping ("/{id}")

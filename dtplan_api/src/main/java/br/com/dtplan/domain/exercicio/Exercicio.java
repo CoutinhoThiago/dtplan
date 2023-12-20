@@ -1,11 +1,12 @@
 package br.com.dtplan.domain.exercicio;
 
+import br.com.dtplan.domain.exercicio.dto.CadastrarExercicioDTO;
+import br.com.dtplan.domain.exercicio.dto.EditarExercicioDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -34,7 +35,7 @@ public class Exercicio {
 	private int duracao_minutos;
 	private int intensidade;
 	
-	public Exercicio(DadosCadastroExercicio dados) {
+	public Exercicio(CadastrarExercicioDTO dados) {
 		this.ativo = true;
 		this.descricao = dados.descricao();
 		this.ativo = dados.ativo();
@@ -51,7 +52,7 @@ public class Exercicio {
 
 	}
 	
-	public void atualizarInformacoes(DadosAtualizacaoExercicio dados) {
+	public void atualizarInformacoes(EditarExercicioDTO dados) {
         if (dados.descricao() != null) {
             this.descricao = dados.descricao();
         }

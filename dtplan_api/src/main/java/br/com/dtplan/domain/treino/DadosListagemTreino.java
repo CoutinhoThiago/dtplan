@@ -1,6 +1,6 @@
 package br.com.dtplan.domain.treino;
 
-import br.com.dtplan.domain.exercicio.DadosDetalhamentoExercicio;
+import br.com.dtplan.domain.exercicio.dto.DetalharExercicioDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +10,7 @@ public record DadosListagemTreino(
 		String descricao,
 		String autor,
 		String tipo,
-		List<DadosDetalhamentoExercicio> exercicios) {
+		List<DetalharExercicioDTO> exercicios) {
 
 	public DadosListagemTreino(Treino treino) {
 		this(
@@ -19,7 +19,7 @@ public record DadosListagemTreino(
 				treino.getAutor(),
 				treino.getTipo(),
 				treino.getExercicios().stream()
-						.map(DadosDetalhamentoExercicio::new)
+						.map(DetalharExercicioDTO::new)
 						.collect(Collectors.toList())
 		);
 	}

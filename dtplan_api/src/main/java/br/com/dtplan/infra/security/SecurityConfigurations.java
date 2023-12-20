@@ -27,8 +27,9 @@ public class SecurityConfigurations {
 				.csrf(csrf -> csrf.disable()) // Desabilita CSRF
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura política de sessão como STATELESS
 				.authorizeHttpRequests(req -> {
-					req.requestMatchers(HttpMethod.POST, "/login").permitAll(); // Permite POST no endpoint /login sem autenticação
-					req.requestMatchers(HttpMethod.GET, "/login").permitAll(); // Permite GET no endpoint /login sem autenticação
+					req.requestMatchers(HttpMethod.POST, "/auth/cadastro").permitAll(); // Permite POST no endpoint /login sem autenticação
+					req.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); // Permite POST no endpoint /login sem autenticação
+					req.requestMatchers(HttpMethod.GET, "/auth/login").permitAll(); // Permite GET no endpoint /login sem autenticação
 					req.anyRequest().authenticated(); // Exige autenticação para todos os outros endpoints
 				})
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro personalizado

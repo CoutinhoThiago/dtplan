@@ -23,8 +23,26 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String login;
     private String senha;
+
+    @JoinColumn(name = "permissao")
+    @Enumerated(EnumType.STRING)
+    private PermissaoDeUsuario permissao = null;
+
+    private String nome;
+    private String cpf;
+
+    public Usuario(String login, String senha, String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+
+        this.login = login;
+        this.senha = senha;
+
+        this.permissao = null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

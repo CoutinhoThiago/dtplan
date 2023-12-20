@@ -1,9 +1,7 @@
 package br.com.dtplan.controller;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import br.com.dtplan.domain.exercicio.DadosDetalhamentoExercicio;
 import br.com.dtplan.domain.exercicio.ExercicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,11 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.dtplan.domain.exercicio.Exercicio;
-import br.com.dtplan.domain.exercicio.ExercicioRepository;
-import br.com.dtplan.domain.musculo.DadosCadastroMusculo;
-import br.com.dtplan.domain.musculo.DadosDetalhamentoMusculo;
-import br.com.dtplan.domain.musculo.DadosListagemMusculo;
-import br.com.dtplan.domain.musculo.Musculo;
 import br.com.dtplan.domain.treino.DadosCadastroTreino;
 import br.com.dtplan.domain.treino.DadosDetalhamentoTreino;
 import br.com.dtplan.domain.treino.DadosListagemTreino;
